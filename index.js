@@ -1,4 +1,16 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
+const client = new Client({
+  authStrategy: new LocalAuth({
+    dataPath: './session'
+  }),
+  puppeteer: {
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage'
+    ]
+  }
+});
 const qrcode = require('qrcode-terminal');
 const { google } = require('googleapis');
 const dayjs = require('dayjs');
