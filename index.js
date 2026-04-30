@@ -1,16 +1,4 @@
-const client = new Client({
-  authStrategy: new LocalAuth({
-    dataPath: './session'
-  }),
-  puppeteer: {
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage'
-    ]
-  }
-});
+const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const { google } = require('googleapis');
 const dayjs = require('dayjs');
@@ -30,8 +18,13 @@ const sheets = google.sheets({ version: 'v4', auth });
 
 // ===== WHATSAPP =====
 const client = new Client({
-  authStrategy: new LocalAuth(),
-  puppeteer: { headless: true, args: ['--no-sandbox'] }
+  authStrategy: new LocalAuth({
+    dataPath: './session'
+  }),
+  puppeteer: {
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  }
 });
 
 client.on('qr', qr => qrcode.generate(qr, { small: true }));
