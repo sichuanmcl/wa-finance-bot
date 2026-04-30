@@ -10,7 +10,7 @@ const SHEET_NAME = 'finance';
 
 // ===== GOOGLE AUTH =====
 const auth = new google.auth.GoogleAuth({
-  keyFile: 'credentials.json',
+  credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
